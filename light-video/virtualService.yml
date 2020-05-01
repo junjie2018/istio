@@ -14,6 +14,6 @@ spec:
             prefix: /
       route:
         - destination:
-            host: light-video-resin-service
+            host: light-video-resin-service.default.svc.cluster.local
             port:
               number: 7001
