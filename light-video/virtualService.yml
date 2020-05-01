@@ -7,6 +7,7 @@ spec:
     - "x-light.pcvideo.com.cn"
   gateways:
     - light-video-istio-ingressgateway
+    - mesh
   http:
     - match:
         - uri:
