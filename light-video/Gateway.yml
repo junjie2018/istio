@@ -7,7 +7,8 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - x-light.pcvideo.com.cn
+        light-video-nginx-service.default.svc.cluster.local
+        # - x-light.pcvideo.com.cn
       port:
         name: entry-port
         number: 80
