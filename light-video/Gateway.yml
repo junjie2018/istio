@@ -7,8 +7,25 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - x-light.pcvideo.com.cn
+        - "x-light.pcvideo.com.cn"
       port:
         name: entry-port
         number: 80
         protocol: HTTP
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: my-first-virtual-service
+spec:
+  hosts:
+    - "x-light.pcvideo.com.cn"
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: light-video-resin-service.default.svc.cluster.local
+            port:
+              number: 7001
