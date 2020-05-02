@@ -1,3 +1,3 @@
-FROM nginx:1.9.12
+FROM busybox
 
 ADD hosts /etc/
