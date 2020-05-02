@@ -4,7 +4,7 @@ metadata:
   name: my-first-virtual-service
 spec:
   hosts:
-    - junjie
+    - x-light.pcvideo.com.cn
   http:
     - match:
         - uri:
