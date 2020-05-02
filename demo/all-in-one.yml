@@ -45,7 +45,7 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - mytoys.fun
+        - "*"
       port:
         name: entry-port
         number: 80
@@ -57,7 +57,7 @@ metadata:
   name: demo-virtual-service
 spec:
   hosts:
-    - fun.mytoys
+    - "*"
   http:
     - match:
         - uri:
