@@ -4,7 +4,7 @@ metadata:
   name: my-first-virtual-service
 spec:
   hosts:
-    - "x-light.pcvideo.com.cn:81"
+    - "x-light.pcvideo.com.cn"
   http:
     - match:
         - uri:
