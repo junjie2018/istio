@@ -67,7 +67,9 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /
+            prefix: /test1
+        - uri:
+            prefix: /test2
       route:
         - destination:
             host: demo-service.default.svc.cluster.local
