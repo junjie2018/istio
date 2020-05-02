@@ -60,6 +60,7 @@ spec:
     - demo-gateway
     - mesh
   hosts:
+    - demo-service.default.svc.cluster.local
     - mytoys.fun
   http:
     - match:
