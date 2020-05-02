@@ -41,7 +41,7 @@ spec:
         service: light-video-nginx
     spec:
       containers:
-        - image: 'nginx:1.9.12'
+        - image: 'nginx-super2'
           imagePullPolicy: IfNotPresent
           name: light-video-nginx
           ports:
@@ -50,8 +50,12 @@ spec:
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
+          commond: ["nginx"]
+          args:
+            - -c
+            - /etc/nginx/constom/nginx-config
           volumeMounts:
-            - mountPath: /etc/nginx/conf.d
+            - mountPath: /etc/nginx/custom
               name: nginx-config
       dnsPolicy: ClusterFirst
       restartPolicy: Always
