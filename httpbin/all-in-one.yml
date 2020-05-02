@@ -20,6 +20,8 @@ metadata:
 spec:
   hosts:
     - "httpbin.example.com"
+  gateways:
+    - http-gateway
   http:
     - match:
         - uri:
