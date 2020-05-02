@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: light-video-istio-ingressgateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - x-light.pcvideo.com.cn
+      port:
+        name: entry-port
+        number: 80
+        protocol: HTTP
