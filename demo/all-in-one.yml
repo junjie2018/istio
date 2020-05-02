@@ -42,7 +42,7 @@ metadata:
   name: demo-gateway
 spec:
   selector:
-  istio: ingressgateway
+    istio: ingressgateway
   servers:
     - hosts:
         - mytoys.fun
