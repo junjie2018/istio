@@ -21,7 +21,7 @@ spec:
   hosts:
     - "httpbin.example.com"
   gateways:
-    - http-gateway
+    - httpbin-gateway
   http:
     - match:
         - uri:
