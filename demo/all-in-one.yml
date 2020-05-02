@@ -48,7 +48,7 @@ spec:
         - mytoys.fun
       port:
         name: entry-port
-        number: 8000
+        number: 80
         protocol: HTTP
 ---
 apiVersion: networking.istio.io/v1alpha3
