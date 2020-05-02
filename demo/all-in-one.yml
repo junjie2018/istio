@@ -45,9 +45,10 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - mytoys.com
+        - junjie.mytoys.com
+        - xiaojie.mytoys.com
       port:
-        name: entry-port
+        name: http
         number: 80
         protocol: HTTP
 ---
@@ -61,7 +62,8 @@ spec:
     - mesh
   hosts:
     - demo-service.default.svc.cluster.local
-    - mytoys.com
+    - junjie.mytoys.com
+    - xiaojie.mytoys.com
   http:
     - match:
         - uri:
