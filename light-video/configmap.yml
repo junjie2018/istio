@@ -124,7 +124,7 @@ data:
       location ~ ^/admin/ {
               rewrite ^/admin/(.*)$  /admin/$1  break;
                 proxy_pass          http://PC_LIGHTVIDEO;
-                proxy_redirect      off;
+                proxy_redirect      http://light-video-resin-service.default.svc.cluster.local:7001/admin/ http://x-light.pcvideo.com.cn;
                 proxy_set_header    Domain           $Host;
                 proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
                 proxy_set_header    X-Real-IP        $remote_addr;
