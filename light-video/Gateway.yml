@@ -18,6 +18,8 @@ kind: VirtualService
 metadata:
   name: my-first-virtual-service
 spec:
+  gateways:
+    - light-video-istio-ingressgateway
   hosts:
     - "x-light.pcvideo.com.cn"
   http:
