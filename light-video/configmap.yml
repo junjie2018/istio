@@ -24,11 +24,11 @@ data:
           rewrite /video/(\d*).html  /jsp/template/2016/art.jsp?videoId=$1 break;
           proxy_pass			http://PC_LIGHTVIDEO;
           proxy_redirect      off;
-                proxy_set_header    Domain           $Host;
+          proxy_set_header    Domain           $Host;
           proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
           proxy_set_header    X-Real-IP        $remote_addr;
           proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-                proxy_http_version 1.1;
+          proxy_http_version 1.1;
         }
       
       location ~ ^/upload(.*) {
@@ -36,22 +36,22 @@ data:
         rewrite ^/upload/(\d*).html /jsp/template/2016/video/uploadVideo.jsp?videoId=$1 break;
         proxy_pass			http://PC_LIGHTVIDEO;
         proxy_redirect      off;
-            proxy_set_header    Domain           $Host;
+        proxy_set_header    Domain           $Host;
         proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
         proxy_set_header    X-Real-IP        $remote_addr;
         proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-            proxy_http_version 1.1;
+        proxy_http_version 1.1;
       }	
       
       location ~ ^/renzheng(.*)  {
         rewrite ^/renzheng.html  /jsp/template/2016/personal/apply.jsp break;
         proxy_pass          http://PC_LIGHTVIDEO;
         proxy_redirect      off;
-            proxy_set_header    Domain           $Host;
+        proxy_set_header    Domain           $Host;
         proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
         proxy_set_header    X-Real-IP        $remote_addr;
         proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-            proxy_http_version 1.1;
+        proxy_http_version 1.1;
       }
       
       location ~ ^/author(.*) {
@@ -65,7 +65,7 @@ data:
 
         proxy_pass          http://PC_LIGHTVIDEO;
         proxy_redirect      off;
-            proxy_set_header    Domain           $Host;
+        proxy_set_header    Domain           $Host;
         proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
         proxy_set_header    X-Real-IP        $remote_addr;
         proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
@@ -77,11 +77,11 @@ data:
         rewrite ^/recommend/user/ /jsp/template/2016/user_recommendlist.jsp?pageNo=1 break;		
         proxy_pass          http://PC_LIGHTVIDEO;
         proxy_redirect      off;
-            proxy_set_header    Domain           $Host;
+        proxy_set_header    Domain           $Host;
         proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
         proxy_set_header    X-Real-IP        $remote_addr;
         proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-            proxy_http_version 1.1;
+        proxy_http_version 1.1;
       }
       
       location ~ ^/my(.*) {
@@ -114,17 +114,17 @@ data:
         rewrite ^/my/information/ /jsp/template/2016/personal/myInformation.jsp break;
         proxy_pass          http://PC_LIGHTVIDEO;
         proxy_redirect      off;
-            proxy_set_header    Domain           $Host;
+        proxy_set_header    Domain           $Host;
         proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
         proxy_set_header    X-Real-IP        $remote_addr;
         proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-            proxy_http_version 1.1;
+        proxy_http_version 1.1;
       }	
       
       location ~ ^/admin/ {
               rewrite ^/admin/(.*)$  /admin/$1  break;
                 proxy_pass          http://PC_LIGHTVIDEO;
-                proxy_redirect      http://light-video-resin-service:7001/ http://light-video-resin-service.default.svc.cluster.local:7001;
+                proxy_redirect      off
                 proxy_set_header    Domain           $Host;
                 proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
                 proxy_set_header    X-Real-IP        $remote_addr;
@@ -138,11 +138,11 @@ data:
           rewrite ^/fenlei/(\d*)/$  /jsp/template/2016/index.jsp?typeId=$1 break;		
           proxy_pass          http://PC_LIGHTVIDEO;
           proxy_redirect      off;
-                proxy_set_header    Domain           $Host;
+          proxy_set_header    Domain           $Host;
           proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
           proxy_set_header    X-Real-IP        $remote_addr;
           proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-                proxy_http_version 1.1;
+          proxy_http_version 1.1;
         }    
       
 
@@ -150,17 +150,17 @@ data:
           rewrite ^/tgflxq.html$  /jsp/template/2016/tgflxq.jsp break;
           proxy_pass          http://PC_LIGHTVIDEO;
           proxy_redirect      off;
-                proxy_set_header    Domain           $Host;
+          proxy_set_header    Domain           $Host;
           proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
           proxy_set_header    X-Real-IP        $remote_addr;
           proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-                proxy_http_version 1.1;
+          proxy_http_version 1.1;
         }
       
       
       ########## wap start ##########
         location ~ ^/light {
-            rewrite ^/light($|/$)              /wap/index.jsp  break;
+          rewrite ^/light($|/$)              /wap/index.jsp  break;
           rewrite ^/light/fenlei/(\d*)/$     /wap/index.jsp?typeId=$1 break;
           rewrite ^/light/video/(\d*).html   /wap/art.jsp?videoId=$1 break;
           rewrite ^/light/search.html(.*)    /wap/query.jsp$1 break;
@@ -168,11 +168,11 @@ data:
           rewrite ^/light/(.+)               /wap/$1  break;
           proxy_pass          http://PC_LIGHTVIDEO;
           proxy_redirect      off;
-                proxy_set_header    Domain           $Host;
+          proxy_set_header    Domain           $Host;
           proxy_set_header    Host             light-video-resin-service.default.svc.cluster.local:7001;
           proxy_set_header    X-Real-IP        $remote_addr;
           proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-                proxy_http_version 1.1;
+          proxy_http_version 1.1;
         } 
       ########## wap end ##########
       
