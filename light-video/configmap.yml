@@ -2,15 +2,15 @@ apiVersion: v1
 data:
   nginx.conf: |
     upstream  PC_LIGHTVIDEO {
-      light-video-resin-service.default.svc.cluster.local:7001;
+      server light-video-resin-service.default.svc.cluster.local:7001;
     }
 
     upstream  WAP_LIGHTVIDEO {
-      light-video-resin-service.default.svc.cluster.local:7001;
+      server light-video-resin-service.default.svc.cluster.local:7001;
     } 
 
     upstream  PC_LIGHTVIDEO_ADMIN {
-      light-video-resin-service.default.svc.cluster.local:7001;
+      server light-video-resin-service.default.svc.cluster.local:7001;
     } 
 
 
