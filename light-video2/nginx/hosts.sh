@@ -1,1 +1,0 @@
-echo "10.104.12.6 x-light.pcvideo.com.cn" >> /etc/hosts

@@ -1,14 +1,33 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: light-video-istio-ingressgateway
+  name: nginx-light-video-gateway
 spec:
   selector:
     istio: ingressgateway
   servers:
     - hosts:
-        - x-light.pcvideo.com.cn
+        - "x-light.pcvideo.com.cn"
       port:
-        name: entry-port
+        name: http
         number: 80
         protocol: HTTP
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-to-service
+spec:
+  gateways:
+    - nginx-light-video-gateway
+  hosts:
+    - "x-light.pcvideo.com.cn"
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: nginx-light-video-service.default.svc.cluster.local
+            port:
+              number: 80

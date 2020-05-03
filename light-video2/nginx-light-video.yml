@@ -1,34 +1,30 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: light-video-nginx-service
-  name: light-video-nginx-service
+  name: nginx-light-video-service
 spec:
   selector:
-    app: light-video-nginx
+    app: nginx-light-video-service
   ports:
-    - name: http
-      port: 81
+    - port: 80
       protocol: TCP
-      targetPort: 81
+      targetPort: 80
+  sessionAffinity: None
   type: ClusterIP
----
-
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: light-video-nginx-service
-    service: light-video-nginx
-  name: light-video-nginx
+    app: nginx-light-video-deployment
+  name: nginx-light-video-deployment
 spec:
+  progressDeadlineSeconds: 600
   replicas: 1
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: light-video-nginx
-      service: light-video-nginx
+      app: nginx-light-video-deployment
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -37,25 +33,38 @@ spec:
   template:
     metadata:
       labels:
-        app: light-video-nginx
-        service: light-video-nginx
+        app: nginx-light-video-deployment
     spec:
       containers:
-        - image: 'nginx-super2'
+        - name: light-video2
+          image: light-video2:latest
+          env:
+            - name: JAVA_HOME
+              value: /usr/java/jdk1.6.0_38
+
           imagePullPolicy: IfNotPresent
-          name: light-video-nginx
+
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+
+        - name: nginx
+          image: "nginx:1.9.12"
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
               protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-          commond: ["nginx"]
-          args:
-            - -c
-            - /etc/nginx/constom/nginx-config
           volumeMounts:
-            - mountPath: /etc/nginx/custom
+            - mountPath: /etc/nginx/conf.d
               name: nginx-config
       dnsPolicy: ClusterFirst
       restartPolicy: Always
