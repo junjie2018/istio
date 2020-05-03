@@ -30,7 +30,7 @@ spec:
         - destination:
             host: light-video-nginx-service.default.svc.cluster.local
             port:
-              number: 80
+              number: 81
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
