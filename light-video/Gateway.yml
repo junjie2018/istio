@@ -16,10 +16,29 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: my-first-virtual-service
+  name: gateway-to-nginx
 spec:
   gateways:
     - light-video-istio-ingressgateway
+  hosts:
+    - "x-light.pcvideo.com.cn"
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: light-video-nginx-service.default.svc.cluster.local
+            port:
+              number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx-to-server
+spec:
+  gateways:
+    - mesh
   hosts:
     - "x-light.pcvideo.com.cn"
   http:
