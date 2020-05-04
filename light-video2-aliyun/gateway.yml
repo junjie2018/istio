@@ -7,7 +7,7 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - "x-light.pcvideo.com.cn"
+        - "z-light.pcvideo.com.cn"
       port:
         name: http
         number: 80
@@ -21,7 +21,7 @@ spec:
   gateways:
     - nginx-light-video-gateway
   hosts:
-    - "x-light.pcvideo.com.cn"
+    - "z-light.pcvideo.com.cn"
   http:
     - match:
         - uri:
