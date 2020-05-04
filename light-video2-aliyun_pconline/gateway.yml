@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: nginx-light-video-gateway
+  namespace: pconline
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - "z-light.pcvideo.com.cn"
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-to-service
+  namespace: pconline
+spec:
+  gateways:
+    - nginx-light-video-gateway
+  hosts:
+    - "z-light.pcvideo.com.cn"
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: nginx-light-video-service.default.svc.cluster.local
+            port:
+              number: 80
