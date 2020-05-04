@@ -201,13 +201,13 @@ kind: ConfigMap
 metadata:
   creationTimestamp: '2020-04-20T11:11:41Z'
   name: nginx-light-video-configmap
-  namespace: pconline
+  namespace: kube-pconline
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-light-video-service
-  namespace: pconline
+  namespace: kube-pconline
 spec:
   selector:
     app: nginx-light-video-deployment
@@ -224,7 +224,7 @@ metadata:
   labels:
     app: nginx-light-video-deployment
   name: nginx-light-video-deployment
-  namespace: pconline
+  namespace: kube-pconline
 spec:
   replicas: 1
   selector:

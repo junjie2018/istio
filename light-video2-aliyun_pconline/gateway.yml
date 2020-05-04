@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: nginx-light-video-gateway
-  namespace: pconline
+  namespace: kube-pconline
 spec:
   selector:
     istio: ingressgateway
@@ -18,7 +18,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: gateway-to-service
-  namespace: pconline
+  namespace: kube-pconline
 spec:
   gateways:
     - nginx-light-video-gateway
@@ -30,6 +30,6 @@ spec:
             prefix: /
       route:
         - destination:
-            host: nginx-light-video-service.default.svc.cluster.local
+            host: nginx-light-video-service.kube-pconline.svc.cluster.local
             port:
               number: 80
