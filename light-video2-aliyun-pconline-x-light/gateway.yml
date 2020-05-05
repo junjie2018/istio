@@ -2,11 +2,8 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: nginx-light-video-gateway
+  namespace: kube-pconline
 spec:
-  # 有点迷，这个selector到底是针对的Pod还是说针对的Service啊
-  # 以前认为是针对Pod，所以有这样的解释：这个selector选择了pod，这些pod上的envoy将会打开自己的80端口，接收外部的请求。
-  # 外部请求的是service，service将请求发送给了这些pod，这些pod上的envoy就开始有机会应用自己的各种规则了。
-  # 如果这个selector选择的是service，我目前还没看到过这种场景。
   selector:
     istio: ingressgateway
   servers:
@@ -21,6 +18,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: gateway-to-service
+  namespace: kube-pconline
 spec:
   gateways:
     - nginx-light-video-gateway
@@ -32,6 +30,6 @@ spec:
             prefix: /
       route:
         - destination:
-            host: nginx-light-video-service.default.svc.cluster.local
+            host: nginx-light-video-service.kube-pconline.svc.cluster.local
             port:
               number: 80
