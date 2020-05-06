@@ -21,7 +21,7 @@ metadata:
   namespace: junjie
 spec:
   gateways:
-    - z-gw
+    - z-gateway
   hosts:
     - "z-light.pcvideo.com.cn"
   http:
