@@ -256,7 +256,7 @@ spec:
           terminationMessagePolicy: File
           volumeMounts:
             - mountPath: /etc/nginx/conf.d
-              name: nginx-light-video
+              name: z-nginx-light-video
       restartPolicy: Always
       volumes:
         - configMap:
