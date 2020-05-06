@@ -17,7 +17,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: zVirtualService
+  name: z-gateway-to-service
   namespace: junjie
 spec:
   gateways:
