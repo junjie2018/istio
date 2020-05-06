@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  creationTimestamp: '2020-04-24T10:35:20Z'
+  generation: 33
+  name: light-video-virtual-service
+  namespace: kube-pconline
+  resourceVersion: '6271237'
+  selfLink: >-
+    /apis/networking.istio.io/v1alpha3/namespaces/kube-pconline/virtualservices/light-video-virtual-service
+  uid: 4bacb7b2-8617-11ea-b122-00163e04da40
+spec:
+  gateways:
+    - light-video-istio-ingressgateway
+    - mesh
+  hosts:
+    - x-light.pcvideo.com.cn
+  http:
+    - match:
+        - port: 80
+      route:
+        - destination:
+            host: light-video-nginx-service.kube-pconline.svc.cluster.local

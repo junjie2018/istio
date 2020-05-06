@@ -1,0 +1,1 @@
+registry.cn-shenzhen.aliyuncs.com/3conline/rdc-demo-base

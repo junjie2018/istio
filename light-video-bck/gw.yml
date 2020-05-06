@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  creationTimestamp: '2020-04-21T08:49:55Z'
+  generation: 20
+  name: light-video-istio-ingressgateway
+  namespace: kube-pconline
+  resourceVersion: '5444486'
+  selfLink: >-
+    /apis/networking.istio.io/v1alpha3/namespaces/kube-pconline/gateways/light-video-istio-ingressgateway
+  uid: 12c6c2bd-83ad-11ea-84ca-00163e120ed8
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - x-light.pcvideo.com.cn
+      port:
+        name: entry-port
+        number: 80
+        protocol: HTTP
