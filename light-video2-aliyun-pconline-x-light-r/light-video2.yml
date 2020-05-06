@@ -1,0 +1,266 @@
+apiVersion: v1
+data:
+  light-video.conf: |
+    upstream  PC_LIGHTVIDEO {
+      server 127.0.0.1:7001;
+    }
+
+    upstream  WAP_LIGHTVIDEO {
+      server 127.0.0.1:7001;
+    } 
+
+    upstream  PC_LIGHTVIDEO_ADMIN {
+      server 127.0.0.1:7001;
+    } 
+
+
+    server {
+      listen       80;
+      server_name  x-light.pcvideo.com.cn;
+
+
+      #### video #####
+      location ~ ^/video/(.*)$ {
+          rewrite /video/(\d*).html  /jsp/template/2016/art.jsp?videoId=$1 break;
+          proxy_pass			http://PC_LIGHTVIDEO;
+          proxy_redirect      off;
+          proxy_set_header    Domain           $Host;
+          proxy_set_header    Host             x-light.pcvideo.com.cn;
+          proxy_set_header    X-Real-IP        $remote_addr;
+          proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+          proxy_http_version 1.1;
+        }
+      
+      location ~ ^/upload(.*) {
+        rewrite ^/upload.html /jsp/template/2016/video/uploadVideo.jsp break;
+        rewrite ^/upload/(\d*).html /jsp/template/2016/video/uploadVideo.jsp?videoId=$1 break;
+        proxy_pass			http://PC_LIGHTVIDEO;
+        proxy_redirect      off;
+        proxy_set_header    Domain           $Host;
+        proxy_set_header    Host             x-light.pcvideo.com.cn;
+        proxy_set_header    X-Real-IP        $remote_addr;
+        proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_http_version 1.1;
+      }	
+      
+      location ~ ^/renzheng(.*)  {
+        rewrite ^/renzheng.html  /jsp/template/2016/personal/apply.jsp break;
+        proxy_pass          http://PC_LIGHTVIDEO;
+        proxy_redirect      off;
+        proxy_set_header    Domain           $Host;
+        proxy_set_header    Host             x-light.pcvideo.com.cn;
+        proxy_set_header    X-Real-IP        $remote_addr;
+        proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_http_version 1.1;
+      }
+      
+      location ~ ^/author(.*) {
+        rewrite ^/author/(\d*).html /jsp/template/2016/author/author_index.jsp?userId=$1 break;
+        rewrite ^/author/(\d*)/(\d*).html /jsp/template/2016/author/author_index.jsp?userId=$1&pageNo=$2 break;
+        rewrite ^/author/fans/(\d*)/(\d*)/ /jsp/template/2016/author/author_fans.jsp?userId=$1&pageNo=$2 break;
+        rewrite ^/author/fans/(\d*)/ /jsp/template/2016/author/author_fans.jsp?userId=$1 break;
+        rewrite ^/author/followers/(\d*)/(\d*)/ /jsp/template/2016/author/author_followers.jsp?userId=$1&pageNo=$2 break;
+        rewrite ^/author/followers/(\d*)/ /jsp/template/2016/author/author_followers.jsp?userId=$1 break;
+        
+
+        proxy_pass          http://PC_LIGHTVIDEO;
+        proxy_redirect      off;
+        proxy_set_header    Domain           $Host;
+        proxy_set_header    Host             x-light.pcvideo.com.cn;
+        proxy_set_header    X-Real-IP        $remote_addr;
+        proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+            proxy_http_version 1.1;
+      }	
+      
+      location ~ ^/recommend/user(.*) {
+        rewrite ^/recommend/user/(\d*).html /jsp/template/2016/user_recommendlist.jsp?pageNo=$1 break;
+        rewrite ^/recommend/user/ /jsp/template/2016/user_recommendlist.jsp?pageNo=1 break;		
+        proxy_pass          http://PC_LIGHTVIDEO;
+        proxy_redirect      off;
+        proxy_set_header    Domain           $Host;
+        proxy_set_header    Host             x-light.pcvideo.com.cn;
+        proxy_set_header    X-Real-IP        $remote_addr;
+        proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_http_version 1.1;
+      }
+      
+      location ~ ^/my(.*) {
+        rewrite ^/my/author.html /jsp/template/2016/personal/myRead.jsp break;
+        rewrite ^/my/author-(\d*).html /jsp/template/2016/personal/myRead.jsp?pageNo=$1 break;
+        rewrite ^/my/video.html /jsp/template/2016/personal/verified.jsp?status=1 break;
+        rewrite ^/my/video/(\d*).html /jsp/template/2016/personal/verified.jsp?status=1&pageNo=$1 break;
+        rewrite ^/my/pending.html /jsp/template/2016/personal/verified.jsp?status=0 break;
+        rewrite ^/my/pending/(\d*).html /jsp/template/2016/personal/verified.jsp?status=0&pageNo=$1 break;
+        rewrite ^/my/nopass.html /jsp/template/2016/personal/verified.jsp?status=2 break;
+        rewrite ^/my/nopass/(\d*).html /jsp/template/2016/personal/verified.jsp?status=2&pageNo=$1 break;
+        rewrite ^/my/favorite.html /jsp/template/2016/personal/myCollect.jsp break;
+        rewrite ^/my/favorite/(\d*).html /jsp/template/2016/personal/myCollect.jsp?pageNo=$1 break;
+        rewrite ^/my/history.html /jsp/template/2016/personal/myHistory.jsp break;
+        rewrite ^/my/history/(\d*).html /jsp/template/2016/personal/myHistory.jsp?pageNo=$1 break;
+        rewrite ^/my/comment/send/(\d*).html /jsp/template/2016/personal/myCommentSend.jsp?pageNo=$1 break;
+        rewrite ^/my/comment/rec/(\d*).html /jsp/template/2016/personal/myCommentRec.jsp?pageNo=$1 break;
+        rewrite ^/my/comment/send/ /jsp/template/2016/personal/myCommentSend.jsp break;
+        rewrite ^/my/comment/rec/ /jsp/template/2016/personal/myCommentRec.jsp break;
+        rewrite ^/my/fans/(\d*)/ /jsp/template/2016/personal/myFans.jsp?pageNo=$1 break;
+        rewrite ^/my/fans/ /jsp/template/2016/personal/myFans.jsp break;
+        rewrite ^/my/followers/(\d*)/ /jsp/template/2016/personal/myFollowers.jsp?pageNo=$1 break;
+        rewrite ^/my/followers/ /jsp/template/2016/personal/myFollowers.jsp break;
+        rewrite ^/my/notice/(\d*).html /jsp/template/2016/personal/myNotice.jsp?pageNo=$1 break;
+        rewrite ^/my/notice/ /jsp/template/2016/personal/myNotice.jsp break;
+        rewrite ^/my/message/(\d*).html /jsp/template/2016/personal/myMessage.jsp?pageNo=$1 break;
+        rewrite ^/my/message/ /jsp/template/2016/personal/myMessage.jsp break;
+        rewrite ^/my/messageDialogue/(\d*)/(\d*).html /jsp/template/2016/personal/myMessageDialogue.jsp?senderId=$1&pageNo=$2 break;
+        rewrite ^/my/messageDialogue/(\d*)/ /jsp/template/2016/personal/myMessageDialogue.jsp?senderId=$1 break;
+        rewrite ^/my/information/ /jsp/template/2016/personal/myInformation.jsp break;
+        proxy_pass          http://PC_LIGHTVIDEO;
+        proxy_redirect      off;
+        proxy_set_header    Domain           $Host;
+        proxy_set_header    Host             x-light.pcvideo.com.cn;
+        proxy_set_header    X-Real-IP        $remote_addr;
+        proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_http_version 1.1;
+      }	
+      
+      location ~ ^/admin/ {
+              rewrite ^/admin/(.*)$  /admin/$1  break;
+                proxy_pass          http://PC_LIGHTVIDEO;
+                proxy_redirect      off;
+                proxy_set_header    Domain           $Host;
+                proxy_set_header    Host             x-light.pcvideo.com.cn;
+                proxy_set_header    X-Real-IP        $remote_addr;
+                proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+                proxy_http_version 1.1;
+          }
+
+      #### index#####	    
+        location ~ ^/fenlei/(.*)$ {
+          rewrite ^/fenlei/(\d*)/(\d*)/$  /jsp/template/2016/index.jsp?typeId=$1&pageNo=$2 break;
+          rewrite ^/fenlei/(\d*)/$  /jsp/template/2016/index.jsp?typeId=$1 break;		
+          proxy_pass          http://PC_LIGHTVIDEO;
+          proxy_redirect      off;
+          proxy_set_header    Domain           $Host;
+          proxy_set_header    Host             x-light.pcvideo.com.cn;
+          proxy_set_header    X-Real-IP        $remote_addr;
+          proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+          proxy_http_version 1.1;
+        }    
+      
+
+        location ~ ^/tgflxq(.*) {
+          rewrite ^/tgflxq.html$  /jsp/template/2016/tgflxq.jsp break;
+          proxy_pass          http://PC_LIGHTVIDEO;
+          proxy_redirect      off;
+          proxy_set_header    Domain           $Host;
+          proxy_set_header    Host             x-light.pcvideo.com.cn;
+          proxy_set_header    X-Real-IP        $remote_addr;
+          proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+          proxy_http_version 1.1;
+        }
+      
+      
+      ########## wap start ##########
+        location ~ ^/light {
+          rewrite ^/light($|/$)              /wap/index.jsp  break;
+          rewrite ^/light/fenlei/(\d*)/$     /wap/index.jsp?typeId=$1 break;
+          rewrite ^/light/video/(\d*).html   /wap/art.jsp?videoId=$1 break;
+          rewrite ^/light/search.html(.*)    /wap/query.jsp$1 break;
+          rewrite ^/light/comIntf/(.+)       /intf/$1 break;
+          rewrite ^/light/(.+)               /wap/$1  break;
+          proxy_pass          http://PC_LIGHTVIDEO;
+          proxy_redirect      off;
+          proxy_set_header    Domain           $Host;
+          proxy_set_header    Host             x-light.pcvideo.com.cn;
+          proxy_set_header    X-Real-IP        $remote_addr;
+          proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+          proxy_http_version 1.1;
+        } 
+      ########## wap end ##########
+      
+          
+          location ~ ^/ {
+              rewrite ^/(\d*)/$  /jsp/template/2016/index.jsp?typeId=0&pageNo=$1 break;
+              rewrite ^/$  /jsp/template/2016/index.jsp?typeId=0 break;
+          rewrite ^$  /jsp/template/2016/index.jsp?typeId=0 break;
+                rewrite ^/search.html(.*)  /jsp/template/2016/query.jsp$1 break;
+                proxy_pass          http://PC_LIGHTVIDEO;
+                proxy_redirect      off; 
+                proxy_set_header    Domain           $Host;
+                proxy_set_header    Host             x-light.pcvideo.com.cn;
+                proxy_set_header    X-Real-IP        $remote_addr;
+                proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+                proxy_http_version 1.1;
+            }	
+            
+            
+            error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   html;
+            }
+    } 
+kind: ConfigMap
+metadata:
+  creationTimestamp: '2020-04-20T11:11:41Z'
+  name: nginx-light-video-configmap
+  namespace: kube-pconline
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-light-video-service
+  namespace: kube-pconline
+spec:
+  selector:
+    app: nginx-light-video-deployment
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-light-video-deployment
+  name: nginx-light-video-deployment
+  namespace: kube-pconline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-light-video-deployment
+  template:
+    metadata:
+      labels:
+        app: nginx-light-video-deployment
+    spec:
+      containers:
+        - name: light-video2
+          image: registry.cn-shenzhen.aliyuncs.com/3conline/light-video3:wujunjie
+          env:
+            - name: JAVA_HOME
+              value: /usr/java/jdk1.6.0_38
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        - name: nginx
+          image: "nginx:1.9.12"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: nginx-light-video
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: nginx-light-video-configmap
+          name: nginx-light-video
