@@ -236,7 +236,7 @@ spec:
     spec:
       containers:
         - name: lightvideo
-          image: registry.cn-shenzhen.aliyuncs.com/3conline/lightvideo_junjie:v5
+          image: registry.cn-shenzhen.aliyuncs.com/3conline/lightvideo_junjie:v6
           env:
             - name: JAVA_HOME
               value: /usr/java/jdk1.6.0_38
