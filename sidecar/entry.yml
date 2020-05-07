@@ -1,0 +1,8 @@
+apiVerstion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: test-passpord
+  namespace: kube-pconline
+spec:
+  hosts:
+    - "219.136.244.122"

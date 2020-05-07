@@ -16,4 +16,4 @@ spec:
             app: nginx-light-video-deployment
       route:
         - destination:
-            host: "219.136.244.122"
+            host: test-passpord.kube-pconline.svc.cluster.local
