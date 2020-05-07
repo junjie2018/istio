@@ -1,4 +1,4 @@
-apiVerstion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: test-passpord
