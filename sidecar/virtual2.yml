@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: testPasspord
+  name: test-passpord
   namespace: kube-pconline
 spec:
   hosts:
