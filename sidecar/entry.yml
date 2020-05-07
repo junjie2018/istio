@@ -6,3 +6,4 @@ metadata:
 spec:
   hosts:
     - "219.136.244.122"
+  resolution: NONE
