@@ -16,4 +16,4 @@ spec:
             app: nginx-light-video-deployment
       route:
         - destination:
-            host: 219.136.244.122
+            host: "219.136.244.122"
