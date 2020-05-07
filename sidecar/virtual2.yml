@@ -7,10 +7,13 @@ spec:
   hosts:
     - "219.136.244.122"
   http:
+    - headers:
+      request:
+        add:
+          host: recognize.pconline.com.cn
     - match:
         - sourceLabels:
             app: nginx-light-video-deployment
-    - headers:
-        request:
-          add:
-            host: recognize.pconline.com.cn
+      rotue:
+        - destination:
+            host: 219.136.244.122
