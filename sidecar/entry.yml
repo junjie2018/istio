@@ -1,4 +1,20 @@
 apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+    name: egress-gateway
+    namespace: kube-pconline
+spec:
+    selector:
+        app: egress-gateway
+    servers:
+        - port:
+            number: 90
+            name: http
+            protocol: HTTP
+          hosts:
+            - 219.136.244.122
+---
+apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: test-passpord
