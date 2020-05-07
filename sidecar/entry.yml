@@ -4,8 +4,8 @@ metadata:
   name: test-passpord
   namespace: kube-pconline
 spec:
-  # hosts:
-  #   - "219.136.244.122"
+  hosts:
+    - "recognize.pconline.com.cn"
   address: 219.136.244.122
   resolution: NONE
 ---
