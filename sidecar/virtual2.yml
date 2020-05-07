@@ -16,4 +16,4 @@ spec:
             app: nginx-light-video-deployment
       route:
         - destination:
-            host: "recognize.pconline.com.cn"
+            host: "219.136.244.122"
