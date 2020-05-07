@@ -1,14 +1,14 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: gateway-to-service
+  name: gateway-to-service2
 spec:
   hosts:
     - "199.199.99.99"
   http:
     - match:
-        sourceLabels:
-          app: nginx-light-video-deployment
+        - sourceLabels:
+            app: nginx-light-video-deployment
       route:
         - destination:
             host: nginx-light-video-service.default.svc.cluster.local
