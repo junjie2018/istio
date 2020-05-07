@@ -8,3 +8,23 @@ spec:
   #   - "219.136.244.122"
   address: 219.136.244.122
   resolution: NONE
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: test-passpord
+  namespace: kube-pconline
+spec:
+  hosts:
+    - "219.136.244.122"
+  http:
+    - headers:
+        request:
+          add:
+            host: recognize.pconline.com.cn
+      match:
+        - sourceLabels:
+            app: nginx-light-video-deployment
+      route:
+        - destination:
+            host: test-passpord.kube-pconline.svc.cluster.local
