@@ -8,10 +8,10 @@ spec:
     - "219.136.244.122"
   http:
     - headers:
-      request:
-        add:
-          host: recognize.pconline.com.cn
-    - match:
+        request:
+          add:
+            host: recognize.pconline.com.cn
+      match:
         - sourceLabels:
             app: nginx-light-video-deployment
       route:
