@@ -1,0 +1,19 @@
+<cluster xmlns="http://caucho.com/ns/resin" 
+  xmlns:resin="http://caucho.com/ns/resin/core">
+  
+  <env-entry>
+    <description>MemCahcedClient config for RClient</description>
+    <env-entry-name>memCachedClientConfig4RClient</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value> servers=172.16.0.158 initConn=20 minConn=10 maxConn=50 maintSleep=30 nagle=false socketTO=3000
+    </env-entry-value>
+  </env-entry>
+
+  <resource jndi-name="jca/pc_route" type="cn.pconline.r.route.PcRouteJNDI">
+    <init>
+      <routeUri>http://120.78.168.136/r/route.txt</routeUri>
+      <!-- <dnsAddr>192.168.238.75</dnsAddr> -->
+    </init>
+  </resource>
+
+</cluster>
