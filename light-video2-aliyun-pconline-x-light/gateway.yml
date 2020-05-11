@@ -13,6 +13,12 @@ spec:
         name: http
         number: 80
         protocol: HTTP
+    - hosts:
+        - "light.pcvideo.com.cn"
+      port:
+        name: http
+        number: 443
+        protocol: HTTP
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -24,6 +30,7 @@ spec:
     - nginx-light-video-gateway
   hosts:
     - "x-light.pcvideo.com.cn"
+    - "light.pcvideo.com.cn"
   http:
     - match:
         - uri:

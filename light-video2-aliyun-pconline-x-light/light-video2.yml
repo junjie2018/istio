@@ -16,7 +16,7 @@ data:
 
     server {
       listen       80;
-      server_name  x-light.pcvideo.com.cn;
+      server_name  x-light.pcvideo.com.cn light.pcvideo.com.cn;
 
 
       #### video #####
