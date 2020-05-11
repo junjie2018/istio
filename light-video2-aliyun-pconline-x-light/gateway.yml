@@ -16,7 +16,7 @@ spec:
     - hosts:
         - "light.pcvideo.com.cn"
       port:
-        name: http
+        name: http2
         number: 443
         protocol: HTTP
 ---
